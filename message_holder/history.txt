@@ -1,0 +1,2 @@
+HumanMessage(content="but my favourinte anime is tonikaku kawaii")
+AIMessage(content="sorry for wrong answer")
