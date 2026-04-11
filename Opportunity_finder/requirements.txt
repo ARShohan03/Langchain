@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pydantic
+scikit-learn
+python-dotenv
+requests
+beautifulsoup4
+sqlite3 ; python_version < "3"

@@ -1,0 +1,18 @@
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Project-specific
+data/processed/scholarships.json
+data/scholarships.db
+scratch/
+
+# Python caching
+__pycache__/
+*.py[cod]
+*$py.class

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opportunity Finder | AI-Powered Scholarship Matching</title>
+    <meta name="description" content="Discover Erasmus Mundus and global scholarships perfectly matched to your academic profile using AI-powered analysis.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="bg-glow"></div>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i data-lucide="graduation-cap"></i>
+                <span>Opportunity Finder</span>
+            </div>
+            <h1>Discover Your Global Potential</h1>
+            <p>Enter your academic profile and let AI match you with world-class scholarships — ranked by your personal fit score.</p>
+        </header>
+
+        <main id="app">
+            <!-- Profile Form Section -->
+            <section id="profile-section" class="card glass">
+                <div class="form-header">
+                    <h2>Your Academic Profile</h2>
+                    <p class="form-subtitle">Fill in your details accurately for the best scholarship matches.</p>
+                </div>
+                <form id="profile-form">
+                    <div class="form-grid">
+                        <!-- Row 1: Name + Field -->
+                        <div class="input-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="field">Field of Study</label>
+                            <input type="text" id="field" placeholder="e.g. Computer Science, AI, Engineering" required>
+                        </div>
+
+                        <!-- Row 2: CGPA + Scale -->
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="cgpa">CGPA</label>
+                                <input type="number" id="cgpa" step="0.01" min="0" max="10" placeholder="3.8" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="cgpa_scale">Scale</label>
+                                <input type="number" id="cgpa_scale" step="0.1" min="1" max="10" value="4.0" required>
+                            </div>
+                        </div>
+
+                        <!-- Row 3: Current + Target Degree -->
+                        <div class="input-group">
+                            <label for="degree">Current Degree</label>
+                            <select id="degree">
+                                <option value="BSc">Bachelor's (BSc)</option>
+                                <option value="MSc">Master's (MSc)</option>
+                                <option value="PhD">PhD</option>
+                                <option value="High School">High School</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="target_degree">Target Degree</label>
+                            <select id="target_degree">
+                                <option value="MSc">Master's (MSc)</option>
+                                <option value="PhD">PhD</option>
+                                <option value="PostDoc">PostDoc</option>
+                            </select>
+                        </div>
+
+                        <!-- Row 4: Research + Internships -->
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="research_papers">Research Papers</label>
+                                <input type="number" id="research_papers" min="0" value="0">
+                            </div>
+                            <div class="input-group">
+                                <label for="internships">Internships</label>
+                                <input type="number" id="internships" min="0" value="0">
+                            </div>
+                        </div>
+
+                        <!-- Row 5: English Test -->
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="english_test">English Test</label>
+                                <select id="english_test">
+                                    <option value="">Not taken</option>
+                                    <option value="IELTS">IELTS</option>
+                                    <option value="TOEFL">TOEFL</option>
+                                    <option value="Duolingo">Duolingo English Test</option>
+                                    <option value="PTE">PTE Academic</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="english_score">Score</label>
+                                <input type="number" id="english_score" step="0.5" min="0" max="120" placeholder="e.g. 7.0">
+                            </div>
+                        </div>
+
+                        <!-- Row 6: Extracurriculars (full width) -->
+                        <div class="input-group full-width">
+                            <label for="extracurriculars">Extracurriculars <span class="label-hint">(comma separated)</span></label>
+                            <input type="text" id="extracurriculars" placeholder="e.g. AI Research, Volunteering, Debate Club, Open Source">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="submit-btn">
+                        <span>Find My Scholarships</span>
+                        <i data-lucide="sparkles"></i>
+                    </button>
+                </form>
+            </section>
+
+            <!-- Loading Section -->
+            <section id="loading-section" class="hidden">
+                <div class="loader-container card glass">
+                    <div class="spinner"></div>
+                    <h3>Curating Global STEM Opportunities</h3>
+                    <p>Our AI is analyzing scholarship programs across 5 major global regions.</p>
+                    <div class="loading-steps">
+                        <div class="step" id="step-3"><i data-lucide="bar-chart-2"></i> Ranking results by fit score</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="results-section" class="hidden">
+                <div class="results-header">
+                    <div>
+                        <h2>Your Scholarship Matches</h2>
+                        <p id="results-subtitle" class="results-subtitle"></p>
+                    </div>
+                    <button id="back-btn" class="btn-secondary">
+                        <i data-lucide="arrow-left"></i>
+                        <span>Edit Profile</span>
+                    </button>
+                </div>
+                <div id="mock-notice" class="mock-notice hidden">
+                    <i data-lucide="info"></i>
+                    <span>Showing sample results — add your HuggingFace token to <code>.env</code> for real AI analysis.</span>
+                </div>
+                <div id="results-grid" class="results-grid">
+                    <!-- Results injected here -->
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Opportunity Finder &mdash; AI-powered scholarship matching for ambitious students.</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
